@@ -11,15 +11,11 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     container:
       image: python:3.9-slim
 
     steps:
-      - name: Configure Git
-        run: |
-          git config --global user.email "palharevallabh@gmail.com"
-          git config --global user.name "Palharevallabh"
-
       - name: Checkout
         uses: actions/checkout@v3
 
@@ -34,4 +30,5 @@ jobs:
           flake8 service --count --max-complexity=10 --max-line-length=127 --statistics
 
       - name: Run unit tests with nose
-        run: nosetests -v --with-spec --spec-color --with-coverage --cover-package=app
+        run: |
+          nosetests -v --with-spec --spec-color --with-coverage --cover-package=app
